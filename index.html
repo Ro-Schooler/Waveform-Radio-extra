@@ -718,15 +718,13 @@
                         </div>
                     </div>
 
-                    <!-- EMBEDDED PLAYER IFRAME / CUSTOM AUDIO CONTAINER -->
                     <div class="iframe-container" id="iframe-container">
                         <iframe id="custom-iframe" src="" style="width: 100%; height: 120px; border: none;" allow="autoplay"></iframe>
                     </div>
 
-                    <!-- AUDIO TAG FOR DIRECT STREAMING -->
-                    <audio id="audio-player" preload="none"></audio>
+                    <!-- PRE-LOADED STREAM SOURCE -->
+                    <audio id="audio-player" src="https://remixradio.bloxcraftcreations.dpdns.org/listen/waveform_extra/radio.mp3" preload="none"></audio>
 
-                    <!-- EMBED CONFIG EXPANDER -->
                     <div class="embed-toggle-box">
                         <div class="embed-toggle-header" id="embed-toggle-trigger">
                             <span><i class="fa-solid fa-sliders"></i> Embed Custom Stream / Player Code</span>
@@ -735,7 +733,7 @@
 
                         <div class="embed-form" id="embed-form">
                             <p style="font-size: 0.8rem; color: var(--text-muted);">Paste direct stream URL (MP3/AAC) or AzuraCast IFrame URL below:</p>
-                            <input type="text" class="input-field" id="stream-url-input" placeholder="e.g. https://remix-radio.bloxcraftcreations.dpdns.org/listen.mp3">
+                            <input type="text" class="input-field" id="stream-url-input" value="https://remixradio.bloxcraftcreations.dpdns.org/listen/waveform_extra/radio.mp3">
                             <div style="display: flex; gap: 8px;">
                                 <button class="btn btn-gold" id="apply-direct-btn" style="flex: 1; justify-content: center;">Apply Direct Stream</button>
                                 <button class="btn" id="apply-iframe-btn" style="flex: 1; justify-content: center;">Apply iFrame</button>
@@ -751,7 +749,6 @@
                     </div>
 
                     <div class="dj-grid">
-                        <!-- DJ SCORPION -->
                         <div class="dj-card">
                             <span class="dj-badge badge-founder">Founder & Creator</span>
                             <div class="dj-avatar" style="background: linear-gradient(135deg, var(--primary-red), var(--gold-accent)); color: #fff;">
@@ -764,7 +761,6 @@
                             </div>
                         </div>
 
-                        <!-- DJ COBRA -->
                         <div class="dj-card">
                             <span class="dj-badge badge-headliner">Headliner</span>
                             <div class="dj-avatar" style="background: linear-gradient(135deg, var(--holiday-green), #065f46); color: #fff;">
@@ -924,7 +920,7 @@
             else ctx.clearRect(0, 0, canvas.width, canvas.height);
         });
 
-        // --- PLAYER SIMULATION / DIRECT AUDIO ---
+        // --- PLAYER CONTROLS ---
         const audio = document.getElementById('audio-player');
         const playBtn = document.getElementById('play-btn');
         const playIcon = document.getElementById('play-icon');
@@ -934,16 +930,15 @@
 
         playBtn.addEventListener('click', () => {
             if (!isPlaying) {
-                if (audio.src) {
-                    audio.play().catch(() => {});
-                }
-                playIcon.className = 'fa-solid fa-pause';
-                eqBars.forEach(bar => bar.classList.add('active'));
-                isPlaying = true;
+                audio.play().then(() => {
+                    playIcon.className = 'fa-solid fa-pause';
+                    eqBars.forEach(bar => bar.classList.add('active'));
+                    isPlaying = true;
+                }).catch(err => {
+                    alert("Could not load stream. Please check if your AzuraCast server is online.");
+                });
             } else {
-                if (audio.src) {
-                    audio.pause();
-                }
+                audio.pause();
                 playIcon.className = 'fa-solid fa-play';
                 eqBars.forEach(bar => bar.classList.remove('active'));
                 isPlaying = false;
@@ -954,7 +949,7 @@
             audio.volume = e.target.value;
         });
 
-        // --- CUSTOM STREAM / IFRAME TOGGLE ---
+        // --- EMBED FORM CONTROLS ---
         const embedTrigger = document.getElementById('embed-toggle-trigger');
         const embedForm = document.getElementById('embed-form');
         const streamInput = document.getElementById('stream-url-input');
@@ -976,7 +971,6 @@
                 playIcon.className = 'fa-solid fa-pause';
                 eqBars.forEach(bar => bar.classList.add('active'));
                 isPlaying = true;
-                alert('Direct audio stream updated!');
             }
         });
 
@@ -991,7 +985,6 @@
                 }
                 customIframe.src = url;
                 iframeContainer.classList.add('active');
-                alert('Embedded iFrame player updated!');
             }
         });
 
