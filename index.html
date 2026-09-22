@@ -271,6 +271,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: opacity 0.3s ease;
         }
 
         .hat-overlay {
@@ -691,8 +692,8 @@
                         </div>
 
                         <div class="player-info">
-                            <div class="track-title" id="track-title">Jingle Bell Bass (DJ Scorpion VIP Remix)</div>
-                            <div class="artist-name" id="artist-name">DJ Scorpion ft. Santa Posse</div>
+                            <div class="track-title" id="track-title">Loading track title...</div>
+                            <div class="artist-name" id="artist-name">Remix Radio Station</div>
 
                             <div class="equalizer">
                                 <div class="eq-bar"></div>
@@ -865,6 +866,39 @@
     </div>
 
     <script>
+        // --- REAL-TIME AZURACAST "NOW PLAYING" API ---
+        const NOW_PLAYING_API = 'https://remixradio.bloxcraftcreations.dpdns.org/api/nowplaying/waveform_extra';
+
+        function fetchNowPlaying() {
+            fetch(NOW_PLAYING_API)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.now_playing && data.now_playing.song) {
+                        const song = data.now_playing.song;
+                        
+                        // Update track title and artist
+                        if (song.title) {
+                            document.getElementById('track-title').textContent = song.title;
+                        }
+                        if (song.artist) {
+                            document.getElementById('artist-name').textContent = song.artist;
+                        }
+
+                        // Update cover art image if available in AzuraCast
+                        if (song.art) {
+                            document.getElementById('album-art-img').src = song.art;
+                        }
+                    }
+                })
+                .catch(err => {
+                    console.log('Error fetching AzuraCast song info:', err);
+                });
+        }
+
+        // Fetch immediately on page load, then refresh every 10 seconds
+        fetchNowPlaying();
+        setInterval(fetchNowPlaying, 10000);
+
         // --- SNOW ANIMATION ---
         const canvas = document.getElementById('snow-canvas');
         const ctx = canvas.getContext('2d');
@@ -1012,3 +1046,4 @@
     </script>
 </body>
 </html>
+        
