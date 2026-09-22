@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remix Radio - 24/7 Christmas & Holiday Club Remixes | Founder DJ Scorpion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --bg-card: rgba(18, 25, 41, 0.7);
+            --bg-card-border: rgba(255, 255, 255, 0.08);
+            --primary-red: #f43f5e;
+            --primary-red-glow: rgba(244, 63, 94, 0.35);
+            --holiday-green: #10b981;
+            --holiday-green-glow: rgba(16, 185, 129, 0.35);
+            --gold-accent: #fbbf24;
+            --gold-glow: rgba(251, 191, 36, 0.35);
+            --snow-white: #f8fafc;
+            --text-muted: #94a3b8;
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(244, 63, 94, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(251, 191, 36, 0.05) 0%, transparent 60%);
+            background-attachment: fixed;
+            color: var(--snow-white);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #snow-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--bg-card-border);
+            margin-bottom: 24px;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, var(--primary-red), var(--holiday-green));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 0 20px var(--primary-red-glow);
+            animation: pulse-glow 3s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 15px var(--primary-red-glow); }
+            100% { box-shadow: 0 0 25px var(--holiday-green-glow); }
+        }
+
+        .brand-text h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #fff, var(--gold-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-text p {
+            font-size: 0.825rem;
+            color: var(--holiday-green);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            background: var(--bg-card);
+            border: 1px solid var(--bg-card-border);
+            color: var(--snow-white);
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-family: var(--font-main);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(244, 63, 94, 0.2));
+            border-color: var(--gold-accent);
+            color: var(--gold-accent);
+        }
+
+        .btn-gold:hover {
+            box-shadow: 0 0 15px var(--gold-glow);
+            color: #fff;
+        }
+
+        .announcement-banner {
+            background: linear-gradient(90deg, rgba(244, 63, 94, 0.15), rgba(16, 185, 129, 0.15));
+            border: 1px solid rgba(244, 63, 94, 0.3);
+            border-radius: 12px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+            backdrop-filter: blur(8px);
+        }
+
+        .announcement-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: var(--snow-white);
+        }
+
+        .announcement-badge {
+            background: var(--primary-red);
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        @media (min-width: 992px) {
+            .grid-layout {
+                grid-template-columns: 1.3fr 0.7fr;
+            }
+        }
+
+        .glass-card {
+            background: var(--bg-card);
+            border: 1px solid var(--bg-card-border);
+            border-radius: 20px;
+            padding: 24px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .live-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(244, 63, 94, 0.15);
+            border: 1px solid var(--primary-red);
+            color: var(--primary-red);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-red);
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .player-main {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        @media (min-width: 576px) {
+            .player-main {
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+
+        .album-art-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            border-radius: 16px;
+            overflow: hidden;
+            flex-shrink: 0;
+            margin: 0 auto;
+            border: 2px solid var(--bg-card-border);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .album-art {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hat-overlay {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 40px;
+            transform: rotate(15deg);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+        }
+
+        .player-info {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        @media (min-width: 576px) {
+            .player-info {
+                text-align: left;
+            }
+        }
+
+        .track-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+
+        .artist-name {
+            font-size: 1rem;
+            color: var(--gold-accent);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .equalizer {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            height: 32px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        @media (min-width: 576px) {
+            .equalizer {
+                justify-content: flex-start;
+            }
+        }
+
+        .eq-bar {
+            width: 5px;
+            background: linear-gradient(to top, var(--holiday-green), var(--primary-red));
+            border-radius: 3px;
+            height: 8px;
+            transition: height 0.15s ease;
+        }
+
+        .eq-bar.active {
+            animation: eq-anim 1.2s infinite ease-in-out alternate;
+        }
+
+        @keyframes eq-anim {
+            0% { height: 6px; }
+            100% { height: 32px; }
+        }
+
+        .controls-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .play-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-red), #e11d48);
+            color: #fff;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px var(--primary-red-glow);
+            transition: all 0.2s ease;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 30px var(--primary-red-glow);
+        }
+
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--bg-card-border);
+            flex-grow: 1;
+            max-width: 200px;
+        }
+
+        .volume-slider {
+            width: 100%;
+            accent-color: var(--holiday-green);
+            cursor: pointer;
+        }
+
+        .embed-toggle-box {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--bg-card-border);
+        }
+
+        .embed-toggle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .embed-form {
+            display: none;
+            margin-top: 12px;
+            gap: 10px;
+            flex-direction: column;
+        }
+
+        .embed-form.active {
+            display: flex;
+        }
+
+        .input-field {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--bg-card-border);
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-family: var(--font-main);
+            font-size: 0.875rem;
+            width: 100%;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--holiday-green);
+        }
+
+        .iframe-container {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 15px;
+            display: none;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--bg-card-border);
+        }
+
+        .iframe-container.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--holiday-green);
+        }
+
+        .dj-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        @media (min-width: 600px) {
+            .dj-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .dj-card {
+            background: rgba(10, 15, 26, 0.6);
+            border: 1px solid var(--bg-card-border);
+            border-radius: 16px;
+            padding: 18px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .dj-card:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-3px);
+        }
+
+        .dj-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
+
+        .badge-founder {
+            background: rgba(251, 191, 36, 0.2);
+            color: var(--gold-accent);
+            border: 1px solid var(--gold-accent);
+        }
+
+        .badge-headliner {
+            background: rgba(244, 63, 94, 0.2);
+            color: var(--primary-red);
+            border: 1px solid var(--primary-red);
+        }
+
+        .dj-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            border: 2px solid var(--bg-card-border);
+        }
+
+        .dj-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .dj-role {
+            font-size: 0.8rem;
+            color: var(--holiday-green);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .dj-bio {
+            font-size: 0.825rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .schedule-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .schedule-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            border-left: 3px solid transparent;
+        }
+
+        .schedule-item.active {
+            border-left-color: var(--holiday-green);
+            background: rgba(16, 185, 129, 0.08);
+        }
+
+        .schedule-time {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gold-accent);
+            min-width: 90px;
+        }
+
+        .schedule-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .schedule-info p {
+            font-size: 0.775rem;
+            color: var(--text-muted);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--bg-dark);
+            border: 1px solid var(--bg-card-border);
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+        }
+
+        footer {
+            border-top: 1px solid var(--bg-card-border);
+            padding: 30px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 40px;
+        }
+
+        footer strong {
+            color: var(--snow-white);
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="snow-canvas"></canvas>
+
+    <div class="container">
+        <header>
+            <div class="logo-group">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-snowflake" style="color: #fff;"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>REMIX RADIO <i class="fa-solid fa-gift" style="font-size: 1.1rem; color: var(--primary-red);"></i></h1>
+                    <p>Founded by DJ Scorpion • 24/7 Xmas Remixes</p>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <button class="btn" id="snow-toggle-btn">
+                    <i class="fa-regular fa-snowflake"></i> Snow FX
+                </button>
+                <button class="btn btn-gold" id="staff-modal-btn">
+                    <i class="fa-solid fa-user-shield"></i> Staff Portal
+                </button>
+            </div>
+        </header>
+
+        <div class="announcement-banner">
+            <div class="announcement-content">
+                <span class="announcement-badge">Holiday Live</span>
+                <span id="announcement-text">🎄 24/7 All-Year Christmas & Xmas Dance Remixes are streaming live worldwide!</span>
+            </div>
+            <i class="fa-solid fa-holly-berry" style="color: var(--holiday-green); font-size: 1.2rem;"></i>
+        </div>
+
+        <div class="grid-layout">
+            <div class="left-column" style="display: flex; flex-direction: column; gap: 24px;">
+                
+                <!-- MAIN PLAYER -->
+                <div class="glass-card">
+                    <div class="player-header">
+                        <div class="live-tag">
+                            <span class="live-dot"></span>
+                            AZURACAST STREAM ACTIVE
+                        </div>
+                        <span style="font-size: 0.8rem; color: var(--gold-accent); font-weight: 700;">
+                            320KBPS MP3 HQ
+                        </span>
+                    </div>
+
+                    <div class="player-main">
+                        <div class="album-art-container">
+                            <img src="https://images.unsplash.com/photo-1543589077-47d81606c1bf?auto=format&fit=crop&w=400&q=80" alt="Xmas Album Art" class="album-art" id="album-art-img">
+                            <div class="hat-overlay">🎅</div>
+                        </div>
+
+                        <div class="player-info">
+                            <div class="track-title" id="track-title">Jingle Bell Bass (DJ Scorpion VIP Remix)</div>
+                            <div class="artist-name" id="artist-name">DJ Scorpion ft. Santa Posse</div>
+
+                            <div class="equalizer">
+                                <div class="eq-bar"></div>
+                                <div class="eq-bar"></div>
+                                <div class="eq-bar"></div>
+                                <div class="eq-bar"></div>
+                                <div class="eq-bar"></div>
+                                <div class="eq-bar"></div>
+                                <div class="eq-bar"></div>
+                                <div class="eq-bar"></div>
+                            </div>
+
+                            <div class="controls-row">
+                                <button class="play-btn" id="play-btn">
+                                    <i class="fa-solid fa-play" id="play-icon"></i>
+                                </button>
+
+                                <div class="volume-container">
+                                    <i class="fa-solid fa-volume-high" style="color: var(--text-muted); font-size: 0.85rem;"></i>
+                                    <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.01" value="0.8">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EMBEDDED PLAYER IFRAME / CUSTOM AUDIO CONTAINER -->
+                    <div class="iframe-container" id="iframe-container">
+                        <iframe id="custom-iframe" src="" style="width: 100%; height: 120px; border: none;" allow="autoplay"></iframe>
+                    </div>
+
+                    <!-- AUDIO TAG FOR DIRECT STREAMING -->
+                    <audio id="audio-player" preload="none"></audio>
+
+                    <!-- EMBED CONFIG EXPANDER -->
+                    <div class="embed-toggle-box">
+                        <div class="embed-toggle-header" id="embed-toggle-trigger">
+                            <span><i class="fa-solid fa-sliders"></i> Embed Custom Stream / Player Code</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+
+                        <div class="embed-form" id="embed-form">
+                            <p style="font-size: 0.8rem; color: var(--text-muted);">Paste direct stream URL (MP3/AAC) or AzuraCast IFrame URL below:</p>
+                            <input type="text" class="input-field" id="stream-url-input" placeholder="e.g. https://remix-radio.bloxcraftcreations.dpdns.org/listen.mp3">
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn btn-gold" id="apply-direct-btn" style="flex: 1; justify-content: center;">Apply Direct Stream</button>
+                                <button class="btn" id="apply-iframe-btn" style="flex: 1; justify-content: center;">Apply iFrame</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RESIDENT HEADLINERS -->
+                <div class="glass-card">
+                    <div class="section-title">
+                        <i class="fa-solid fa-crown" style="color: var(--gold-accent);"></i> Station Leaders & Resident DJs
+                    </div>
+
+                    <div class="dj-grid">
+                        <!-- DJ SCORPION -->
+                        <div class="dj-card">
+                            <span class="dj-badge badge-founder">Founder & Creator</span>
+                            <div class="dj-avatar" style="background: linear-gradient(135deg, var(--primary-red), var(--gold-accent)); color: #fff;">
+                                🦂
+                            </div>
+                            <div class="dj-name">DJ Scorpion</div>
+                            <div class="dj-role">Queen of Holiday Beats</div>
+                            <div class="dj-bio">
+                                Creator of Remix Radio and mastermind behind 24/7 Christmas club energy. Blending high-octane synthmas, melodic trance holiday hits, and festive rave bangers.
+                            </div>
+                        </div>
+
+                        <!-- DJ COBRA -->
+                        <div class="dj-card">
+                            <span class="dj-badge badge-headliner">Headliner</span>
+                            <div class="dj-avatar" style="background: linear-gradient(135deg, var(--holiday-green), #065f46); color: #fff;">
+                                🐍
+                            </div>
+                            <div class="dj-name">DJ Cobra</div>
+                            <div class="dj-role">Master of Bass-mas</div>
+                            <div class="dj-bio">
+                                Heavy club specialist bringing deep sub-bass, underground trap-mas, and explosive Christmas remixes every weekend night.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="right-column" style="display: flex; flex-direction: column; gap: 24px;">
+                
+                <!-- BROADCAST SCHEDULE -->
+                <div class="glass-card">
+                    <div class="section-title">
+                        <i class="fa-regular fa-calendar-check"></i> 24/7 Xmas Rotation
+                    </div>
+
+                    <div class="schedule-list">
+                        <div class="schedule-item">
+                            <div class="schedule-time">00:00 - 12:00</div>
+                            <div class="schedule-info">
+                                <h4>Chillmas Lo-Fi & Synth Beats</h4>
+                                <p>AutoDJ Festive Rotation</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item active">
+                            <div class="schedule-time">12:00 - 18:00</div>
+                            <div class="schedule-info">
+                                <h4>All-Day Christmas Club Remixes</h4>
+                                <p>Non-stop High Energy EDM</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">18:00 - 21:00</div>
+                            <div class="schedule-info">
+                                <h4>The Synthmas Hour w/ DJ Scorpion</h4>
+                                <p>Founder's Peak Hour Set</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">21:00 - 00:00</div>
+                            <div class="schedule-info">
+                                <h4>Bass-mas Lockdown w/ DJ Cobra</h4>
+                                <p>Heavy Underground Remixes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REQUEST TRACK -->
+                <div class="glass-card">
+                    <div class="section-title">
+                        <i class="fa-solid fa-compact-disc"></i> Request A Holiday Song
+                    </div>
+
+                    <form id="request-form" style="display: flex; flex-direction: column; gap: 12px;">
+                        <input type="text" class="input-field" placeholder="Song Title / Christmas Track" required id="req-song">
+                        <input type="text" class="input-field" placeholder="Original Artist" required id="req-artist">
+                        <input type="text" class="input-field" placeholder="Your Name / DJ Shoutout" id="req-name">
+                        <button type="submit" class="btn btn-gold" style="width: 100%; justify-content: center; margin-top: 4px;">
+                            <i class="fa-solid fa-paper-plane"></i> Send Request to DJ
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 <strong>Remix Radio</strong>. All-Year Christmas & Holiday Station founded by <strong>DJ Scorpion</strong>.</p>
+        </footer>
+    </div>
+
+    <!-- STAFF MODAL -->
+    <div class="modal-overlay" id="staff-modal">
+        <div class="modal-box">
+            <button class="modal-close" id="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+            <div class="section-title">
+                <i class="fa-solid fa-lock" style="color: var(--primary-red);"></i> Staff Portal - DJ Scorpion Control
+            </div>
+            
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
+                Log into AzuraCast administration & studio control panel.
+            </p>
+
+            <form id="staff-login-form" style="display: flex; flex-direction: column; gap: 12px;">
+                <input type="text" class="input-field" placeholder="Username / DJ Handle (e.g. DJ Scorpion)" required>
+                <input type="password" class="input-field" placeholder="Passcode" required>
+                <button type="submit" class="btn btn-gold" style="justify-content: center;">Authenticate</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // --- SNOW ANIMATION ---
+        const canvas = document.getElementById('snow-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const snowflakes = Array.from({ length: 60 }, () => ({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            radius: Math.random() * 3 + 1,
+            speed: Math.random() * 1 + 0.5,
+            wind: Math.random() * 0.5 - 0.25
+        }));
+
+        let snowActive = true;
+
+        function drawSnow() {
+            if (!snowActive) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                return;
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.beginPath();
+
+            snowflakes.forEach(flake => {
+                ctx.moveTo(flake.x, flake.y);
+                ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
+
+                flake.y += flake.speed;
+                flake.x += flake.wind;
+
+                if (flake.y > canvas.height) {
+                    flake.y = 0;
+                    flake.x = Math.random() * canvas.width;
+                }
+            });
+
+            ctx.fill();
+            requestAnimationFrame(drawSnow);
+        }
+        drawSnow();
+
+        document.getElementById('snow-toggle-btn').addEventListener('click', () => {
+            snowActive = !snowActive;
+            if (snowActive) drawSnow();
+            else ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+
+        // --- PLAYER SIMULATION / DIRECT AUDIO ---
+        const audio = document.getElementById('audio-player');
+        const playBtn = document.getElementById('play-btn');
+        const playIcon = document.getElementById('play-icon');
+        const volumeSlider = document.getElementById('volume-slider');
+        const eqBars = document.querySelectorAll('.eq-bar');
+        let isPlaying = false;
+
+        playBtn.addEventListener('click', () => {
+            if (!isPlaying) {
+                if (audio.src) {
+                    audio.play().catch(() => {});
+                }
+                playIcon.className = 'fa-solid fa-pause';
+                eqBars.forEach(bar => bar.classList.add('active'));
+                isPlaying = true;
+            } else {
+                if (audio.src) {
+                    audio.pause();
+                }
+                playIcon.className = 'fa-solid fa-play';
+                eqBars.forEach(bar => bar.classList.remove('active'));
+                isPlaying = false;
+            }
+        });
+
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+        });
+
+        // --- CUSTOM STREAM / IFRAME TOGGLE ---
+        const embedTrigger = document.getElementById('embed-toggle-trigger');
+        const embedForm = document.getElementById('embed-form');
+        const streamInput = document.getElementById('stream-url-input');
+        const applyDirectBtn = document.getElementById('apply-direct-btn');
+        const applyIframeBtn = document.getElementById('apply-iframe-btn');
+        const iframeContainer = document.getElementById('iframe-container');
+        const customIframe = document.getElementById('custom-iframe');
+
+        embedTrigger.addEventListener('click', () => {
+            embedForm.classList.toggle('active');
+        });
+
+        applyDirectBtn.addEventListener('click', () => {
+            const url = streamInput.value.trim();
+            if (url) {
+                iframeContainer.classList.remove('active');
+                audio.src = url;
+                audio.play();
+                playIcon.className = 'fa-solid fa-pause';
+                eqBars.forEach(bar => bar.classList.add('active'));
+                isPlaying = true;
+                alert('Direct audio stream updated!');
+            }
+        });
+
+        applyIframeBtn.addEventListener('click', () => {
+            const url = streamInput.value.trim();
+            if (url) {
+                if (isPlaying) {
+                    audio.pause();
+                    playIcon.className = 'fa-solid fa-play';
+                    eqBars.forEach(bar => bar.classList.remove('active'));
+                    isPlaying = false;
+                }
+                customIframe.src = url;
+                iframeContainer.classList.add('active');
+                alert('Embedded iFrame player updated!');
+            }
+        });
+
+        // --- STAFF MODAL ---
+        const staffBtn = document.getElementById('staff-modal-btn');
+        const staffModal = document.getElementById('staff-modal');
+        const modalClose = document.getElementById('modal-close-btn');
+
+        staffBtn.addEventListener('click', () => staffModal.classList.add('active'));
+        modalClose.addEventListener('click', () => staffModal.classList.remove('active'));
+
+        document.getElementById('staff-login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Welcome, DJ Scorpion! Connected to AzuraCast Studio API.');
+            staffModal.classList.remove('active');
+        });
+
+        // --- REQUEST FORM ---
+        document.getElementById('request-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const song = document.getElementById('req-song').value;
+            alert(`Thank you! Your song request "${song}" has been submitted to DJ Scorpion! 🎄`);
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
